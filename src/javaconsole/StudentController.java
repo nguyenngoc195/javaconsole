@@ -42,5 +42,4 @@ public class StudentController {
     public void deleteStudent() {
         System.out.println("Delete");
     }
-
 }

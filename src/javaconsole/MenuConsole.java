@@ -10,20 +10,21 @@ public class MenuConsole {
     }
 
     public void createMenu() {
-        while (true) {
-            System.out.println("=========Student Manager========");
-            System.out.println("1. Student list.");
+        loopMenu:
+        for (;;) {
+            System.out.println("----------Student---------");
+            System.out.println("1. List Student.");
             System.out.println("2. Add student.");
             System.out.println("3. Edit student.");
             System.out.println("4. Delete student.");
             System.out.println("5. Exit.");
-            System.out.println("=================================");
+            System.out.println("--------------------------");
             System.out.println("Please enter your choice: ");
-            Scanner scanner = new Scanner(System.in);
+            Scanner scan = new Scanner(System.in);
 
-            String strChoice = scanner.nextLine();
+            String strChoice = scan.nextLine();
 
-            int choice = 0;
+            int choice;
             try {
 
                 choice = Integer.parseInt(strChoice);
@@ -32,35 +33,27 @@ public class MenuConsole {
                 System.err.println("Please enter a number.");
                 continue;
             }
-
             StudentController studentController = new StudentController();
-            if (choice == 5) {
-                break;
-            } else {
-                switch (choice) {
-                    case 1:
-
-                        studentController.getList();
-                        break;
-                    case 2:
-
-                        studentController.addStudent();
-                        break;
-                    case 3:
-
-                        studentController.editStudent();
-                        break;
-                    case 4:
-
-                        studentController.deleteStudent();
-                        break;
-                    default:
-
-                        System.out.println("Please enter number from 1 to 5.");
-                        break;
-                }
+            switch (choice) {
+                case 1:
+                    studentController.getList();
+                    break;
+                case 2:
+                    studentController.addStudent();
+                    break;
+                case 3:
+                    studentController.editStudent();
+                    break;
+                case 4:
+                    studentController.deleteStudent();
+                    break;
+                case 5:
+                    break loopMenu;
+                default:
+                    System.err.println("Please enter number from 1-5.");
+                    break;
             }
+
         }
     }
-
 }
