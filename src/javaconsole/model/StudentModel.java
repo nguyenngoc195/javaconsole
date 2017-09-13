@@ -6,6 +6,7 @@
 package javaconsole.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,31 +15,43 @@ import javaconsole.entity.Student;
 
 public class StudentModel {
 
-    private static ArrayList<Student> listStudent;
+    //   insert
+    public void insert(Student student) {
+        try {
+            Connection cnn = DAO.getConnection();
+            Statement stt = cnn.createStatement();
 
-    public void getList() {
+            StringBuilder sqlQueryBuilder = new StringBuilder();
+            sqlQueryBuilder.append("INSERT INTO");
+            sqlQueryBuilder.append(" ");
+            sqlQueryBuilder.append(" student");
+            sqlQueryBuilder.append(" ");
+            sqlQueryBuilder.append("(name, email, roll_Number, class_Name, status)");
+            sqlQueryBuilder.append(" ");
+            sqlQueryBuilder.append("VALUES");
+            sqlQueryBuilder.append(" ");
+            sqlQueryBuilder.append("(");
+            sqlQueryBuilder.append("'" + student.getName() + "'");
+            sqlQueryBuilder.append(",");
+            sqlQueryBuilder.append("'" + student.getEmail() + "'");
+            sqlQueryBuilder.append(",");
+            sqlQueryBuilder.append("'" + student.getRollnumber() + "'");
+            sqlQueryBuilder.append(",");
+            sqlQueryBuilder.append("'" + student.getClassName() + "'");
+            sqlQueryBuilder.append(",");
+            sqlQueryBuilder.append("'" + student.getStatus() + "'");
+            sqlQueryBuilder.append(");");
 
-    }
-// insert thông tin sinh viên vào db
+            System.out.println("cau lenh sql");
+            System.out.println(sqlQueryBuilder.toString());
+            System.out.println("ket thuc");
 
-    public void searchStudent() {
+            stt.execute(sqlQueryBuilder.toString());
+            System.err.println("thuc hien thanh cong");
 
-    }
-
-    public static void insert(Student student) {
-        if (listStudent == null) {
-            listStudent = new ArrayList<>();
+        } catch (SQLException e) {
+            System.out.println("lỗi...." + e.getMessage());
         }
-        listStudent.add(student);
-    }
-
-    public void update(Student oldStudent, Student newStudent) {
-        listStudent.remove(oldStudent);
-        listStudent.add(newStudent);
-    }
-
-    public void delete(Student student) {
-        listStudent.remove(student);
     }
 
     //truy ván dữ liệu
@@ -47,33 +60,127 @@ public class StudentModel {
 
         try {
             Statement stt = DAO.getConnection().createStatement();
-            ResultSet rc = stt.executeQuery("select * from student");
+            ResultSet rc = stt.executeQuery("SELECT * FROM student;");
+            
             while (rc.next()) {
                 Student student = new Student();
                 student.setId(rc.getInt("id"));
                 student.setName(rc.getString("name"));
                 student.setEmail(rc.getString("email"));
-
+                student.setRollnumber(rc.getString("roll_Number"));
+                student.setClassName(rc.getString("class_Name"));
+                student.setStatus(rc.getString("status"));
+                
                 listStudents.add(student);
 
             }
 
         } catch (SQLException exc) {
-
+            System.err.println("Get list erorr" + exc.getMessage());
         }
         return listStudents;
     }
 
-    public static void main(String[] args) {
-        StudentModel studentModel = new StudentModel();
-        Student student = new Student();
+    public void update1(String name, String email, String rollNumber, String className, int status, int id) throws SQLException {
 
-        listStudent = studentModel.getListStudent();
+        try {
+            String sqlQuery = "update student set name=?, email=?,roll_Number=?, class_Name=?, status=? where id=?";
+            PreparedStatement stm = DAO.getConnection().prepareStatement(sqlQuery);
+            stm.setString(1, name);
+            stm.setString(2, email);
+            stm.setString(3, rollNumber);
+            stm.setString(4, className);
+            stm.setInt(5, status);
+            stm.setLong(6, id);
 
-        for (Student x : listStudent) {
-            System.out.println(x.getId() + x.getName() + x.getEmail());
+            int rowUpdate = stm.executeUpdate();
+            if (rowUpdate > 0) {
+                System.out.println("update okey");
+            }
+        } catch (SQLException e) {
+            System.out.println("lỗi update" + e.getMessage());
         }
 
     }
 
+    public void update2(Student student) {
+        try {
+            Connection cnn = DAO.getConnection();
+            PreparedStatement preStt = cnn.prepareStatement("UPDATE student SET name=?, email=? ,roll_Number=?, class_Name=?, status=? where id=?");
+            preStt.setString(1, student.getName());
+            preStt.setString(2, student.getEmail());
+            preStt.setString(3, student.getRollnumber());
+            preStt.setString(4, student.getClassName());
+            preStt.setString(5, student.getStatus());
+            preStt.setInt(6, student.getId());
+            
+            preStt.execute();
+            
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+
+    public Student getById(int id) {
+        Student student = new Student();
+        try {
+            Connection cnn = DAO.getConnection();
+            PreparedStatement preStt = cnn.prepareStatement("SELECT * FROM student WHERE id=?;");
+            preStt.setInt(1, id);
+            ResultSet rc = preStt.executeQuery();
+            if (rc.next()) {
+                
+                student.setId(rc.getInt("id"));
+                student.setName(rc.getString("name"));
+                student.setEmail(rc.getString("email"));
+                student.setRollnumber(rc.getString("roll_Number"));
+                student.setClassName(rc.getString("class_Name"));
+                student.setStatus(rc.getString("status"));
+               return student;
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return null;
+    }
+
+    public void delete(String name) {
+        try {
+            String sqlQuery = "delete from student where id=?";
+            PreparedStatement stm = DAO.getConnection().prepareStatement(sqlQuery);
+            stm.setString(1, name);
+            int rowsDeleted = stm.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Successfully deleted students!");
+            }
+        } catch (SQLException e) {
+            System.err.println("error during deletion" + e.getMessage());
+        }
+
+    }
+
+    public void delete2(Student student) {
+        try {
+            String sqlQuery = "delete from student where id=?";
+            PreparedStatement stm = DAO.getConnection().prepareStatement(sqlQuery);
+            stm.setInt(1, student.getId());
+            int rowsDeleted = stm.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Đx xóa sinh viên!");
+            }
+        } catch (SQLException e) {
+            System.err.println("Lỗi trong quá trình xóa dl" + e.getMessage());
+        }
+
+    }
+
+    public ArrayList<Object> getList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+    }
+
+    
 }
