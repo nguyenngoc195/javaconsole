@@ -30,6 +30,12 @@ public class FileHnadleDemo {
             br = new BufferedReader(fr);
             while ((str = br.readLine()) != null) {
                 System.out.println(str);
+                System.out.println(br.readLine());
+                System.out.println(br.readLine());
+                System.out.println(br.readLine());
+                System.out.println(br.readLine());
+                System.out.println(br.readLine());
+                System.out.println("_________________");
             }
         } catch (FileNotFoundException e) {
             System.out.println(e);
@@ -39,7 +45,7 @@ public class FileHnadleDemo {
         } finally {
             try {
                 br.close();
-                
+
             } catch (IOException e) {
                 System.out.println(e);
             }
@@ -57,18 +63,19 @@ public class FileHnadleDemo {
             fw = new FileWriter("test.txt");
             bw = new BufferedWriter(fw);
             for (Student studentx : listStudent) {
-                bw.write("ID/:" + studentx.getId());
+                bw.write("ID: " + studentx.getId());
                 bw.newLine();
-                bw.write("Name:" + studentx.getName());
+                bw.write("Name: " + studentx.getName());
                 bw.newLine();
-                bw.write("email:" + studentx.getEmail());
+                bw.write("email: " + studentx.getEmail());
                 bw.newLine();
-                bw.write("roll number" + studentx.getRollnumber());
+                bw.write("roll number: " + studentx.getRollnumber());
                 bw.newLine();
-                bw.write("class name" + studentx.getClassName());
+                bw.write("class name: " + studentx.getClassName());
                 bw.newLine();
-                bw.write("status" + studentx.getStatus());
+                bw.write("status: " + studentx.getStatus());
                 bw.newLine();
+
             }
 
         } catch (IOException e) {
@@ -78,7 +85,7 @@ public class FileHnadleDemo {
             } catch (IOException e) {
             }
         }
-
+        System.out.println("success");
     }
 
 }

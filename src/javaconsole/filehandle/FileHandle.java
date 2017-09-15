@@ -9,26 +9,31 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
+import javaconsole.StudentController;
 
 /**
  *
  * @author Lan
  */
 public class FileHandle {
+
     public static void main(String[] args) {
         try {
             FileInputStream fis = new FileInputStream("file.txt");
             FileOutputStream fos = new FileOutputStream("ngok.txt");
-                    
+
             int b;
-            while((b=fis.read()) != -1 ){
+            while ((b = fis.read()) != -1) {
                 System.out.print((char) b);
                 fos.write(b);
             }
             fis.close();
             fos.close();
         } catch (FileNotFoundException e) {
-        } catch (IOException ex){
+        } catch (IOException ex) {
         }
     }
+
+    
 }

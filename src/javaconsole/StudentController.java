@@ -8,7 +8,6 @@ package javaconsole;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javaconsole.entity.Student;
-import javaconsole.filehandle.FileHnadleDemo;
 import javaconsole.model.StudentModel;
 
 public class StudentController {
@@ -26,36 +25,66 @@ public class StudentController {
             System.out.println("Roll number: " + student.getRollnumber());
             System.out.println("Class name: " + student.getClassName());
             System.out.println("Status: " + student.getStatus());
-            System.out.println("_______________________________________");
+            System.out.println("___________________");
         }
 
     }
 // 2. add student
 
     public void addStudent() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter student information.");
-        System.out.println("Please enter name: ");
-        String name = scanner.nextLine();
-        System.out.println("Please enter email: ");
-        String email = scanner.nextLine();
-        System.out.println("Please enter roll number: ");
-        String rollNumber = scanner.nextLine();
-        System.out.println("Please enter class name: ");
-        String className = scanner.nextLine();
-        System.out.println("Please enter status: ");
-        String status = scanner.nextLine();
-        System.out.println("Name: " + name + ", email: " + email + ", Roll number: " + rollNumber + ", Class name: " + className + ", Status:" + status);
+        add:
+        while (true) {
+            System.out.println("enter 1 insert information");
+            System.out.println("enter 2 exit");
+            Scanner zz = new Scanner(System.in);
+            String strChoi = zz.nextLine();
 
-        Student student = new Student();
-        student.setName(name);
-        student.setEmail(email);
-        student.setRollnumber(rollNumber);
-        student.setClassName(className);
-        student.setStatus(status);
-        student.setId((int) System.currentTimeMillis());
+            int choice;
+            try {
 
-        studentModel.insert(student);
+                choice = Integer.parseInt(strChoi);
+
+            } catch (java.lang.NumberFormatException e) {
+
+                System.err.println("Please enter a number.");
+                continue;
+
+            }
+
+            switch (choice) {
+
+                case 1:
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Please enter student information.");
+                    System.out.println("Please enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.println("Please enter email: ");
+                    String email = scanner.nextLine();
+                    System.out.println("Please enter roll number: ");
+                    String rollNumber = scanner.nextLine();
+                    System.out.println("Please enter class name: ");
+                    String className = scanner.nextLine();
+                    System.out.println("Please enter status: ");
+                    String status = scanner.nextLine();
+                    //  System.out.println("Name: " + name + ", email: " + email + ", Roll number: " + rollNumber + ", Class name: " + className + ", Status:" + status);
+
+                    Student student = new Student();
+                    student.setName(name);
+                    student.setEmail(email);
+                    student.setRollnumber(rollNumber);
+                    student.setClassName(className);
+                    student.setStatus(status);
+                    student.setId((int) System.currentTimeMillis());
+
+                    studentModel.insert(student);
+                    break;
+
+                case 2:
+                    break add;
+            }
+
+        }
+
     }
 // edit student
 
@@ -115,24 +144,24 @@ public class StudentController {
     }
 
     public void deleteStudent() {
-
         while (true) {
             System.out.println("Please enter student ID");
             System.out.println("Enter 0 exit.");
             Scanner scanner = new Scanner(System.in);
             int dltID = scanner.nextInt();
-           if (dltID == 0) {
-               break;
-           }
+            if (dltID == 0) {
+                break;
+            }
             Student ds = studentModel.getById(dltID);
 
             if (ds != null) {
                 studentModel.delete2(ds);
+
             } else {
                 System.err.println("studen not found");
             }
-
         }
     }
 
+   
 }

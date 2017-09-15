@@ -14,7 +14,7 @@ public class MenuConsole {
         loopMenu:
         while (true) {
 
-            System.out.println("-------Student------");
+            System.out.println("_______Student_______");
             System.out.println("1. List Student.");
             System.out.println("2. Add student.");
             System.out.println("3. Edit student.");
@@ -22,7 +22,7 @@ public class MenuConsole {
             System.out.println("5. Export to file.");
             System.out.println("6. Import from file.");
             System.out.println("7. Exit.");
-            System.out.println("--------------------");
+            System.out.println("______________________");
             System.out.println("Please enter your choice: ");
             Scanner scan = new Scanner(System.in);
 
@@ -63,7 +63,7 @@ public class MenuConsole {
                 case 7:
                     break loopMenu;
                 default:
-                    System.err.println("Please enter number from 1-5.");
+                    System.err.println("Please enter number from 1-7.");
                     break;
             }
 

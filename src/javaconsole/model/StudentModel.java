@@ -42,15 +42,15 @@ public class StudentModel {
             sqlQueryBuilder.append("'" + student.getStatus() + "'");
             sqlQueryBuilder.append(");");
 
-            System.out.println("cau lenh sql");
-            System.out.println(sqlQueryBuilder.toString());
-            System.out.println("ket thuc");
+           
+        //    System.out.println(sqlQueryBuilder.toString());
+       
 
             stt.execute(sqlQueryBuilder.toString());
-            System.err.println("thuc hien thanh cong");
+            System.out.println("Add student!");
 
         } catch (SQLException e) {
-            System.out.println("lỗi...." + e.getMessage());
+            System.err.println("err...." + e.getMessage());
         }
     }
 
@@ -166,10 +166,16 @@ public class StudentModel {
             stm.setInt(1, student.getId());
             int rowsDeleted = stm.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("Đx xóa sinh viên!");
+                System.out.println("ID: " + student.getId());
+                System.out.println("Name: " + student.getName());
+                System.out.println("Email: " + student.getEmail());
+                System.out.println("Roll number: " + student.getRollnumber());
+                System.out.println("Class name: " +student.getClassName());
+                System.out.println("Status: " + student.getStatus());
+                System.out.println("Successfully deleted students!");
             }
         } catch (SQLException e) {
-            System.err.println("Lỗi trong quá trình xóa dl" + e.getMessage());
+            System.err.println("error during deletion" + e.getMessage());
         }
 
     }
