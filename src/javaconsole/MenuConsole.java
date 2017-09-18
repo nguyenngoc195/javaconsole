@@ -52,7 +52,7 @@ public class MenuConsole {
                     studentController.editStudent();
                     break;
                 case 4:
-                    studentController.deleteStudent();
+                    studentController.dltStudent();
                     break;
                 case 5:
                     fileHnadleDemo.writeToFile();

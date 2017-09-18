@@ -139,24 +139,9 @@ public class StudentModel {
                return student;
             }
         } catch (SQLException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
         return null;
-    }
-
-    public void delete(String name) {
-        try {
-            String sqlQuery = "delete from student where id=?";
-            PreparedStatement stm = DAO.getConnection().prepareStatement(sqlQuery);
-            stm.setString(1, name);
-            int rowsDeleted = stm.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("Successfully deleted students!");
-            }
-        } catch (SQLException e) {
-            System.err.println("error during deletion" + e.getMessage());
-        }
-
     }
 
     public void delete2(Student student) {

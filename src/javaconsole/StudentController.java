@@ -46,7 +46,7 @@ public class StudentController {
 
             } catch (java.lang.NumberFormatException e) {
 
-                System.err.println("Please enter a number.");
+                System.err.println("Please enter a number." + e.getMessage());
                 continue;
 
             }
@@ -143,7 +143,7 @@ public class StudentController {
 
     }
 
-    public void deleteStudent() {
+  /* public void deleteStudent() {
         while (true) {
             System.out.println("Please enter student ID");
             System.out.println("Enter 0 exit.");
@@ -162,6 +162,65 @@ public class StudentController {
             }
         }
     }
+*/
+    public void dltStudent() {
+        int ID = 0;
+        int choice = 0;
+        dlt:
+        while (true) {
+            System.out.println("enter ID number");
 
-   
+            Scanner scanne = new Scanner(System.in);
+            String str = scanne.nextLine();
+
+            try {
+                ID = Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                System.err.println(e.getMessage());
+                continue;
+            }
+
+            Student ds = studentModel.getById(ID);
+            if (ds == null) {
+                System.out.println("not student");
+
+            } else {
+                System.out.println("________________");
+                System.out.println("ID: " + ds.getId());
+                System.out.println("Name: " + ds.getName());
+                System.out.println("Email: " + ds.getEmail());
+                System.out.println("Roll number: " + ds.getRollnumber());
+                System.out.println("Class name: " + ds.getClassName());
+                System.out.println("Status: " + ds.getStatus());
+                System.out.println("________________");
+                System.out.println("1. Delete student");
+                System.out.println("2. Enter ID again");
+                System.out.println("3. Exit");
+            //  Scanner scanne2 = new Scanner(System.in);
+                String str1 = scanne.nextLine();
+
+                try {
+                    choice = Integer.parseInt(str1);
+                } catch (NumberFormatException e) {
+                    System.err.println(e.getMessage());
+                }
+
+                switch (choice) {
+                    case 1:
+
+                        studentModel.delete2(ds);
+                    case 2:
+
+                        break;
+                    case 3:
+                        break dlt;
+
+                }
+
+            }
+
+        }
+
+    }
+
 }
