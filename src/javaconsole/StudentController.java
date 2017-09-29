@@ -22,9 +22,9 @@ public class StudentController {
             System.out.println("ID: " + student.getId());
             System.out.println("Name: " + student.getName());
             System.out.println("Email: " + student.getEmail());
-            System.out.println("Roll number: " + student.getRollnumber());
-            System.out.println("Class name: " + student.getClassName());
-            System.out.println("Status: " + student.getStatus());
+            System.out.println("Roll number: " + student.getPhone());
+            System.out.println("Class name: " + student.getBrithday());
+            
             System.out.println("___________________");
         }
 
@@ -71,9 +71,9 @@ public class StudentController {
                     Student student = new Student();
                     student.setName(name);
                     student.setEmail(email);
-                    student.setRollnumber(rollNumber);
-                    student.setClassName(className);
-                    student.setStatus(status);
+                    student.setPhone(rollNumber);
+                    student.setBrithday(className);
+                 //   student.setStatus(status);
                     student.setId((int) System.currentTimeMillis());
 
                     studentModel.insert(student);
@@ -91,11 +91,10 @@ public class StudentController {
     public void editStudent() {
         Scanner scanner = new Scanner(System.in);
         int editID;
+        System.out.println("Pleasr enter student ID");
+        String streditID = scanner.nextLine();
+
         while (true) {
-
-            System.out.println("Pleasr enter student ID");
-
-            String streditID = scanner.nextLine();
 
             try {
                 editID = Integer.parseInt(streditID);
@@ -111,9 +110,9 @@ public class StudentController {
             System.out.println("ID          :" + es.getId());
             System.out.println("Name        :" + es.getName());
             System.out.println("Email       :" + es.getEmail());
-            System.out.println("Roll number :" + es.getRollnumber());
-            System.out.println("Class name  :" + es.getClassName());
-            System.out.println("Status      :" + es.getStatus());
+            System.out.println("Roll number :" + es.getPhone());
+            System.out.println("Class name  :" + es.getBrithday());
+    //        System.out.println("Status      :" + es.getStatus());
 
             Student studentx = new Student();
             System.out.println("Enter new name:");
@@ -131,9 +130,9 @@ public class StudentController {
             studentx.setId(editID);
             studentx.setName(newName);
             studentx.setEmail(newMail);
-            studentx.setRollnumber(newRollNumber);
-            studentx.setClassName(newClassName);
-            studentx.setStatus(newStatus);
+            studentx.setPhone(newRollNumber);
+            studentx.setBrithday(newClassName);
+         //   studentx.setStatus(newStatus);
 
             studentModel.update2(studentx);
 
@@ -143,35 +142,15 @@ public class StudentController {
 
     }
 
-  /* public void deleteStudent() {
-        while (true) {
-            System.out.println("Please enter student ID");
-            System.out.println("Enter 0 exit.");
-            Scanner scanner = new Scanner(System.in);
-            int dltID = scanner.nextInt();
-            if (dltID == 0) {
-                break;
-            }
-            Student ds = studentModel.getById(dltID);
-
-            if (ds != null) {
-                studentModel.delete2(ds);
-
-            } else {
-                System.err.println("studen not found");
-            }
-        }
-    }
-*/
     public void dltStudent() {
         int ID = 0;
         int choice = 0;
+        System.out.println("enter ID number");
+        Scanner scanne = new Scanner(System.in);
+        String str = scanne.nextLine();
+
         dlt:
         while (true) {
-            System.out.println("enter ID number");
-
-            Scanner scanne = new Scanner(System.in);
-            String str = scanne.nextLine();
 
             try {
                 ID = Integer.parseInt(str);
@@ -189,14 +168,14 @@ public class StudentController {
                 System.out.println("ID: " + ds.getId());
                 System.out.println("Name: " + ds.getName());
                 System.out.println("Email: " + ds.getEmail());
-                System.out.println("Roll number: " + ds.getRollnumber());
-                System.out.println("Class name: " + ds.getClassName());
-                System.out.println("Status: " + ds.getStatus());
+                System.out.println("Roll number: " + ds.getPhone());
+                System.out.println("Class name: " + ds.getBrithday());
+                
                 System.out.println("________________");
                 System.out.println("1. Delete student");
                 System.out.println("2. Enter ID again");
                 System.out.println("3. Exit");
-            //  Scanner scanne2 = new Scanner(System.in);
+                //  Scanner scanne2 = new Scanner(System.in);
                 String str1 = scanne.nextLine();
 
                 try {

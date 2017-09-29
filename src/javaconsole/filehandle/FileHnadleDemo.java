@@ -69,11 +69,11 @@ public class FileHnadleDemo {
                 bw.newLine();
                 bw.write("email: " + studentx.getEmail());
                 bw.newLine();
-                bw.write("roll number: " + studentx.getRollnumber());
+                bw.write("phoner: " + studentx.getPhone());
                 bw.newLine();
-                bw.write("class name: " + studentx.getClassName());
-                bw.newLine();
-                bw.write("status: " + studentx.getStatus());
+                bw.write("brithday: " + studentx.getBrithday());
+           //     bw.newLine();
+           //     bw.write("status: " + studentx.getStatus());
                 bw.newLine();
 
             }

@@ -26,7 +26,7 @@ public class StudentModel {
             sqlQueryBuilder.append(" ");
             sqlQueryBuilder.append(" student");
             sqlQueryBuilder.append(" ");
-            sqlQueryBuilder.append("(name, email, roll_Number, class_Name, status)");
+            sqlQueryBuilder.append("(name, email, phone, brithday");
             sqlQueryBuilder.append(" ");
             sqlQueryBuilder.append("VALUES");
             sqlQueryBuilder.append(" ");
@@ -35,11 +35,11 @@ public class StudentModel {
             sqlQueryBuilder.append(",");
             sqlQueryBuilder.append("'" + student.getEmail() + "'");
             sqlQueryBuilder.append(",");
-            sqlQueryBuilder.append("'" + student.getRollnumber() + "'");
+            sqlQueryBuilder.append("'" + student.getPhone() + "'");
             sqlQueryBuilder.append(",");
-            sqlQueryBuilder.append("'" + student.getClassName() + "'");
-            sqlQueryBuilder.append(",");
-            sqlQueryBuilder.append("'" + student.getStatus() + "'");
+            sqlQueryBuilder.append("'" + student.getBrithday() + "'");
+         //   sqlQueryBuilder.append(",");
+         //   sqlQueryBuilder.append("'" + student.getStatus() + "'");
             sqlQueryBuilder.append(");");
 
            
@@ -67,9 +67,9 @@ public class StudentModel {
                 student.setId(rc.getInt("id"));
                 student.setName(rc.getString("name"));
                 student.setEmail(rc.getString("email"));
-                student.setRollnumber(rc.getString("roll_Number"));
-                student.setClassName(rc.getString("class_Name"));
-                student.setStatus(rc.getString("status"));
+                student.setPhone(rc.getString("phone"));
+                student.setBrithday(rc.getString("brithday"));
+            //    student.setStatus(rc.getString("status"));
                 
                 listStudents.add(student);
 
@@ -81,16 +81,16 @@ public class StudentModel {
         return listStudents;
     }
 
-    public void update1(String name, String email, String rollNumber, String className, int status, int id) throws SQLException {
+    public void update1(String name, String email, String phone, String brithday, int id) throws SQLException {
 
         try {
-            String sqlQuery = "update student set name=?, email=?,roll_Number=?, class_Name=?, status=? where id=?";
+            String sqlQuery = "update student set name=?, email=?, phoner=?, brithday=? where id=?";
             PreparedStatement stm = DAO.getConnection().prepareStatement(sqlQuery);
             stm.setString(1, name);
             stm.setString(2, email);
-            stm.setString(3, rollNumber);
-            stm.setString(4, className);
-            stm.setInt(5, status);
+            stm.setString(3, phone);
+            stm.setString(4, brithday);
+           // stm.setInt(5, status);
             stm.setLong(6, id);
 
             int rowUpdate = stm.executeUpdate();
@@ -106,12 +106,12 @@ public class StudentModel {
     public void update2(Student student) {
         try {
             Connection cnn = DAO.getConnection();
-            PreparedStatement preStt = cnn.prepareStatement("UPDATE student SET name=?, email=? ,roll_Number=?, class_Name=?, status=? where id=?");
+            PreparedStatement preStt = cnn.prepareStatement("UPDATE student SET name=?, email=? ,phone=?, brithday=? where id=?");
             preStt.setString(1, student.getName());
             preStt.setString(2, student.getEmail());
-            preStt.setString(3, student.getRollnumber());
-            preStt.setString(4, student.getClassName());
-            preStt.setString(5, student.getStatus());
+            preStt.setString(3, student.getPhone());
+            preStt.setString(4, student.getBrithday());
+        //    preStt.setString(5, student.getStatus());
             preStt.setInt(6, student.getId());
             
             preStt.execute();
@@ -133,9 +133,9 @@ public class StudentModel {
                 student.setId(rc.getInt("id"));
                 student.setName(rc.getString("name"));
                 student.setEmail(rc.getString("email"));
-                student.setRollnumber(rc.getString("roll_Number"));
-                student.setClassName(rc.getString("class_Name"));
-                student.setStatus(rc.getString("status"));
+                student.setPhone(rc.getString("phone"));
+                student.setBrithday(rc.getString("brithday"));
+             //   student.setStatus(rc.getString("status"));
                return student;
             }
         } catch (SQLException e) {
@@ -154,9 +154,9 @@ public class StudentModel {
                 System.out.println("ID: " + student.getId());
                 System.out.println("Name: " + student.getName());
                 System.out.println("Email: " + student.getEmail());
-                System.out.println("Roll number: " + student.getRollnumber());
-                System.out.println("Class name: " +student.getClassName());
-                System.out.println("Status: " + student.getStatus());
+                System.out.println("Roll number: " + student.getPhone());
+                System.out.println("Class name: " +student.getBrithday());
+             //   System.out.println("Status: " + student.getStatus());
                 System.out.println("Successfully deleted students!");
             }
         } catch (SQLException e) {

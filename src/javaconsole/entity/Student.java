@@ -6,25 +6,21 @@ public class Student {
     private int id;
     private String name;
     private String email;
-    private String rollnumber;
-    private String className;
-    private String status;
+    private String phone;
+    private String brithday;
+    
+    
     public Student() {
 
     }
 
-    public Student(int id, String name, String email, String rollnumber, String className, String status) {
-        this.id = id;
+    public Student(String name, String email, String phone, String brithday) {
         this.name = name;
         this.email = email;
-        this.rollnumber = rollnumber;
-        this.className = className;
-        this.status = status;
+        this.phone = phone;
+        this.brithday = brithday;
     }
 
-    
-    
-    
     public int getId() {
         return id;
     }
@@ -49,29 +45,24 @@ public class Student {
         this.email = email;
     }
 
-    public String getRollnumber() {
-        return rollnumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setRollnumber(String rollnumber) {
-        this.rollnumber = rollnumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getClassName() {
-        return className;
+    public String getBrithday() {
+        return brithday;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setBrithday(String brithday) {
+        this.brithday = brithday;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    
 
 
 }
